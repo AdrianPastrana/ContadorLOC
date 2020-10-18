@@ -1,0 +1,8 @@
+package contadorloc;
+public class ContadorLOC 
+{
+    public static void main(String[] args) 
+    {
+        new Cuadro();
+    }
+}
