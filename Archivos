@@ -1,0 +1,75 @@
+package contadorloc;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.Buffer;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+public class Archivos 
+{
+    File f;
+    String linea="";
+    int conta;
+    Archivos(File f)
+    {
+      this.f=f;
+    }
+    public void Escritura(String m) throws IOException 
+    {
+    FileWriter fw=new FileWriter(f,true); 
+    //Esrcibe sobre el archivo que se cargo anteriormente 
+    //el file lo sobre escribe 
+    PrintWriter pw=new PrintWriter(fw);
+    //Recibe las instrucciones apartir de los datos dados
+    pw.println(m);
+    fw.close();
+    //cerrar el filewritter
+    }
+    public String Lectura() throws FileNotFoundException
+    //lectura
+    {
+        String aux=" ";
+        Scanner t = new Scanner(f);
+        //caragar los datos desde el archivo
+        while (t.hasNext())
+        //Recorre el archivo de manera secuencial 
+        {
+        linea=t.nextLine();
+        //aux=aux+"\n"+t.nextLine();   
+        Validar(linea);
+        }
+        t.close();
+        System.out.println("El numero de lineas es "+conta);
+        return aux;
+    }
+    public void Validar(String linea)
+    {
+        int exc=0;
+        if(!linea.isEmpty())
+        {
+            for(int i=0; i<linea.length();i++)
+            {
+                if (linea.charAt(i)=='/')
+                {
+                    exc++;
+                }
+                if(linea.charAt(i)=='{')
+                {
+                    exc++;
+                }
+                if(linea.charAt(i)=='}')
+                {
+                    exc++;
+                }
+            }
+            if(exc==0)
+            {
+                System.out.println(linea);
+                conta++;
+                exc=0;
+            }
+        }
+    }
+}
